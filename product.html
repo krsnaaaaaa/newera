@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Half Star Denim Pants</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+        font-family: 'Times New Roman';
+        margin: 0;
+  padding: 0;
+}
+
+.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      height: 80px;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .logo {
+      width: 140px;
+      height: 120px;
+      margin-right: 3rem;
+    }
+
+    .nav-link-wrapper {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      gap: 2rem;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .navbar-right img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: black;
+      bottom: -5px;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: black;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 0.5rem 2rem 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      height: 40px;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+    }
+
+    .search-suggestions {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: white;
+      color: black;
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 10;
+    }
+
+    .search-suggestions div {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    .search-suggestions div:hover {
+      background-color: #f0f0f0;
+    }
+
+    .menu-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .menu-container {
+      position: relative;
+    }
+
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 170%;
+      background-color: white;
+      color: black;
+      min-width: 350px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      z-index: 100;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .menu-dropdown div {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .menu-dropdown div:nth-child(2n) {
+      border-right: none;
+    }
+
+    .menu-dropdown div:hover {
+      background-color: #f0f0f0;
+    }
+
+.container {
+  display: flex;
+  padding: 40px;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+
+.gallery {
+  position: relative;
+  width: 750px;
+  height: 800px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 200px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.arrow.left {
+  left: 10px;
+}
+
+.arrow.right {
+  right: 10px;
+}
+
+.arrow:hover {
+     
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+
+.product-details {
+  max-width: 800px;
+  margin-right:300px ;
+  margin-top: 120px;
+}
+
+.product-details h2{ 
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.product-details p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.price {
+  font-size: larger;  
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 15px;
+}
+
+.sizes button {
+  margin-right: 5px;
+  padding: 5px 10px;
+}
+
+.colors {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.black { background: black; }
+.white { background: white; }
+.yellow { background: gold; }
+.purple { background: purple; }
+.red { background: red; }
+
+.stock {
+  font-style: italic;
+  margin: 15px 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 15px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn.light {
+  background: white;
+  border: 1px solid black;
+}
+
+.btn.light:hover {
+  background: black;
+  color: white;
+}
+
+.btn.dark {
+  background: black;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.links {
+  margin-top: 250px;
+}
+
+.links a {
+  text-decoration: none;
+  color: black;
+    font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 10px;
+  transition: color 0.3s;
+}
+
+
+.links p:hover {
+  text-decoration: underline;
+} 
+
+
+#productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-details h2,
+.product-details p,
+.product-container {
+
+  animation: fadeSlideUp 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+
+
+.product-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 50px 20px;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  background-color: #d1cfca;
+  width: 400px;
+}
+
+.image-container {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Flexbox for horizontal layout */
+.product-info {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 8px;
+  gap: 8px;
+}
+
+.product-name,
+.product-price {
+  font-size: 20px;
+  color: #000;
+  white-space: nowrap;
+}
+
+.product-name span {
+  font-size: 16px;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Enhanced button styling */
+.btn-desire {
+  padding: 6px 12px;
+  background-color: #202020;
+  color: white;
+  border: none;
+  font-size: 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-desire:hover {
+  background-color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.footer {
+    height: 50px;
+  background-color: #c9c7c2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 50px;
+}
+
+.footer-left .logo-img {
+  height: 100px;
+  margin-left: 50rem;    
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.follow-text {
+  font-style: italic;
+  margin-right: 10px;
+  font-family: 'Georgia', serif;
+  color: #000;
+}
+
+.social-icons a img {
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+          <img src="logo.png" alt="NE ERA Logo" class="logo" />
+        </div>
+        <div class="nav-link-wrapper">
+          <a href="#" class="nav-link">HOME</a>
+          <a href="#" class="nav-link">DROW</a>
+          <a href="#" class="nav-link">ABOUT US</a>
+        </div>
+        <div class="navbar-right">
+          <div class="search-box">
+            <input type="text" id="search" placeholder="Find Art’s" onfocus="showSuggestions()" onblur="hideSuggestions()">
+            <img class="search-icon" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon">
+            <div class="search-suggestions" id="suggestions">
+              <div>Abstract Paintings</div>
+              <div>Modern Fashion</div>
+              <div>Canvas Art</div>
+              <div>NE ERA Originals</div>
+            </div>
+          </div>
+          <a href="#"><img src="profile-user.png" alt="User Icon"></a>
+          <a href="#"><img src="shopping-cart.png" alt="Wishlist Icon"></a>
+          <div class="menu-container">
+            <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/2311/2311524.png" alt="Menu Icon" onclick="toggleMenu()">
+            <div class="menu-dropdown" id="menuDropdown">
+              <div>Filter by Category</div>
+              <div>Sort by Price</div>
+              <div>Trending</div>
+              <div>New Arrivals</div>
+              <div>Discounts</div>
+              <div>Best Sellers</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+  <div class="container">
+    <div class="gallery">
+        <button class="arrow left" onclick="changeSlide(-1)">&#10094;</button>
+        <img id="productImage" src="banner.jpg" alt="Product Image">
+        <button class="arrow right" onclick="changeSlide(1)">&#10095;</button>
+      </div>
+      
+
+    <div class="product-details">
+      <h2>Half Star Denim Pants</h2>
+      <p class="price">Rs. 1498.00</p>
+
+      <div class="section">
+        <label>Size</label>
+        <div class="sizes">
+          <button>S</button>
+          <button>M</button>
+          <button>L</button>
+          <button>XL</button>
+          <button>XXL</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <label>Colors</label>
+        <div class="colors">
+            <div class="colors">
+                <span class="color black" data-img="2.png" onclick="changeColorImage(this)"></span>
+                <span class="color white" data-img="banner.jpg" onclick="changeColorImage(this)"></span>
+                <span class="color yellow" data-img="yellow.jpg" onclick="changeColorImage(this)"></span>
+                <span class="color purple" data-img="purple.jpg" onclick="changeColorImage(this)"></span>
+                <span class="color red" data-img="red.jpg" onclick="changeColorImage(this)"></span>
+              </div>
+              
+        </div>
+      </div>
+
+      <p class="stock"> <u><em>6 piece Left</em></p></u>
+
+      <div class="buttons">
+        <button class="btn light">ADD TO MY DESIRE</button>
+        <button class="btn dark">MAKE IT YOUR</button>
+      </div>
+
+      <div class="links">
+        <p>☆ <a href="#">Product Detail</a></p>
+        <p>☆ <a href="#">Free Delivery to first time Customers</a></p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="product-container">
+        <div class="product-card">
+            <div class="image-container">
+              <img src="banner.jpg" alt="Black Hoodie">
+            </div>
+            <div class="product-info">
+              <p class="product-name">Tri-pack Hoodie <br> <span>Rs. xxxx</span> </p>
+              <button class="btn-desire">Add to Cart</button>
+            </div>
+          </div>
+          
+          
+      
+          <div class="product-card">
+            <div class="image-container">
+              <img src="hoodie1.jpg" alt="Black Hoodie">
+            </div>
+            <div class="product-info">
+              <p class="product-name">Tri-pack Hoodie <br> <span>Rs. xxxx</span> </p>
+              <button class="btn-desire">Add to Cart</button>
+            </div>
+          </div>
+          
+          
+      
+          <div class="product-card">
+            <div class="image-container">
+              <img src="hoodie1.jpg" alt="Black Hoodie">
+            </div>
+            <div class="product-info">
+              <p class="product-name">Tri-pack Hoodie <br> <span>Rs. xxxx</span> </p>
+              <button class="btn-desire">Add to Cart</button>
+            </div>
+          </div>
+          
+      
+          <div class="product-card">
+            <div class="image-container">
+              <img src="Board Cover_ Aesthetic.jpg" alt="Black Hoodie">
+            </div>
+            <div class="product-info">
+              <p class="product-name">Tri-pack Hoodie <br> <span>Rs. xxxx</span> </p>
+             
+              <button class="btn-desire">Add to Cart</button>
+            </div>
+          </div>
+          
+          
+      </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="footer-left">
+      <img src="logo.png" alt="newERA logo" class="logo-img" />
+    </div>
+    <div class="footer-right">
+      <p class="follow-text">Be with us on</p>
+      <div class="social-icons">
+        <a href="#"><img src="facebook-icon.png" alt="Facebook" /></a>
+        <a href="#"><img src="youtube-icon.png" alt="YouTube" /></a>
+        <a href="#"><img src="instagram-icon.png" alt="Instagram" /></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+const suggestionsBox = document.getElementById('suggestions');
+    const menuDropdown = document.getElementById('menuDropdown');
+
+    function showSuggestions() {
+      suggestionsBox.style.display = 'block';
+    }
+
+    function hideSuggestions() {
+      setTimeout(() => {
+        suggestionsBox.style.display = 'none';
+      }, 150);
+    }
+
+    function toggleMenu() {
+      menuDropdown.style.display = menuDropdown.style.display === 'grid' ? 'none' : 'grid';
+    }
+
+    window.addEventListener('click', function(e) {
+      if (!e.target.closest('.menu-container')) {
+        menuDropdown.style.display = 'none';
+      }
+    });
+
+    const images = ["2.png", "banner.jpg", "download.jpg"]; // Replace with real paths
+let current = 0;
+
+function changeSlide(step) {
+  const img = document.getElementById("productImage");
+  
+  img.classList.add("fade-out");
+
+  setTimeout(() => {
+    current += step;
+    if (current < 0) current = images.length - 1;
+    if (current >= images.length) current = 0;
+    
+    img.src = images[current];
+    img.classList.remove("fade-out");
+  }, 300); // Wait for the fade-out before changing the image
+}
+
+function changeColorImage(element) {
+  const img = document.getElementById("productImage");
+  const newSrc = element.getAttribute("data-img");
+
+  img.classList.add("fade-out");
+
+  setTimeout(() => {
+    img.src = newSrc;
+    img.classList.remove("fade-out");
+  }, 300);
+}
+
+
+
+  </script>
+</body>
+</html>

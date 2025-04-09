@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NE ERA</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Times New Roman';
+    }
+
+    .hero {
+      background-image: url('banner.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      position: relative;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      height: 100px;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .logo {
+      width: 140px;
+      height: 120px;
+      margin-right: 3rem;
+    }
+
+    .nav-link-wrapper {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      gap: 2rem;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .navbar-right img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: black;
+      bottom: -5px;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: black;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 0.5rem 2rem 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      height: 40px;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+    }
+
+    .search-suggestions {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: white;
+      color: black;
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 10;
+    }
+
+    .search-suggestions div {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    .search-suggestions div:hover {
+      background-color: #f0f0f0;
+    }
+
+    .menu-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .menu-container {
+      position: relative;
+    }
+
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 170%;
+      background-color: white;
+      color: black;
+      min-width: 350px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      z-index: 100;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .menu-dropdown div {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .menu-dropdown div:nth-child(2n) {
+      border-right: none;
+    }
+
+    .menu-dropdown div:hover {
+      background-color: #f0f0f0;
+    }
+
+    .hero-text {
+      position: absolute;
+      bottom: 20%;
+      left: 5%;
+      font-size: 7rem;
+      max-width: 800px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-text strong {
+      font-weight: bold;
+    }
+
+    .banner-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100vh;
+      width: 100vw;
+      padding-right: 5rem;
+    }
+
+    .coolBeans {
+      border: 2px solid black;
+      border-radius: 3rem;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-size: 2rem;
+      font-weight: 100;
+      overflow: hidden;
+      padding: 1rem 2rem;
+      position: relative;
+      text-decoration: none;
+      transition: 0.5s transform ease-in-out;
+      will-change: transform;
+      z-index: 0;
+      top: 190px;
+    }
+
+    .coolBeans::after {
+      background-color: black;
+      border-radius: 3rem;
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-100%, 0) rotate(10deg);
+      transform-origin: top left;
+      transition: 0.5s transform ease-out;
+      will-change: transform;
+      z-index: -1;
+    }
+
+    .coolBeans:hover::after {
+      transform: translate(0, 0);
+    }
+
+    .coolBeans:hover {
+      border: 2px solid transparent;
+      color: whitesmoke;
+      transform: scale(1.05);
+      will-change: transform;
+    }
+
+    /* Carousel Styles */
+    .card-banner {
+      background-color: grey;
+    }
+    .card-banner h1 {
+      text-align: center;
+      font-size: 3rem;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      padding-top: 4rem; 
+        margin-bottom: 2rem;
+    }
+
+    .card-carousel {
+      position: relative;
+      margin: 4rem auto;
+      width: 100%;
+      max-width: 1800px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-wrapper {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%;
+    padding: 1rem;
+    scroll-snap-type: x mandatory;
+
+    scrollbar-width: none; /* Firefox */
+    }
+
+    .card-wrapper::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Edge */
+    }
+
+    .card {
+        width: 20%;
+      min-width: calc(100% / 4 - 1rem);
+      background-color: #f4f4f4;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+
+    .card-text {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #333;
+      display: flex;
+    }
+
+    .card-text h2{
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+
+
+
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255,255,255,0.8);
+      border: none;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .left-btn {
+      left: -0.5rem;
+    }
+
+    .right-btn {
+      right: -0.5rem;
+    }
+
+    .custom-btn {
+        padding: 0.75rem 2rem;
+        background-color: black;
+        color: white;
+        font-size: 0.8rem;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .custom-btn:hover {
+        background-color: black;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        transform: scale(1.05);
+    }
+
+
+
+    .container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.containerar {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: antiquewhite;
+}
+.title {
+  font-size: 2.5rem;
+  letter-spacing: 0.2em;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.category {
+  position: relative;
+  width: 400px;
+  overflow: hidden;
+}
+
+.category img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.category:hover img {
+  transform: scale(1.05);
+}
+
+.category:hover .label {
+  background: rgba(0, 0, 0, 0.7);
+}
+.label {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px 0;
+  font-size: 1.5rem;
+  font-family: 'Georgia', serif;
+}
+
+    
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <nav class="navbar">
+      <div class="navbar-left">
+        <img src="logo.png" alt="NE ERA Logo" class="logo" />
+      </div>
+      <div class="nav-link-wrapper">
+        <a href="#" class="nav-link">HOME</a>
+        <a href="#" class="nav-link">DROW</a>
+        <a href="#" class="nav-link">ABOUT US</a>
+      </div>
+      <div class="navbar-right">
+        <div class="search-box">
+          <input type="text" id="search" placeholder="Find Art’s" onfocus="showSuggestions()" onblur="hideSuggestions()">
+          <img class="search-icon" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon">
+          <div class="search-suggestions" id="suggestions">
+            <div>Abstract Paintings</div>
+            <div>Modern Fashion</div>
+            <div>Canvas Art</div>
+            <div>NE ERA Originals</div>
+          </div>
+        </div>
+        <a href="#"><img src="profile-user.png" alt="User Icon"></a>
+        <a href="#"><img src="shopping-cart.png" alt="Wishlist Icon"></a>
+        <div class="menu-container">
+          <img class="menu-icon" src="https://cdn-icons-png.flaticon.com/512/2311/2311524.png" alt="Menu Icon" onclick="toggleMenu()">
+          <div class="menu-dropdown" id="menuDropdown">
+            <div>Filter by Category</div>
+            <div>Sort by Price</div>
+            <div>Trending</div>
+            <div>New Arrivals</div>
+            <div>Discounts</div>
+            <div>Best Sellers</div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-text">
+      Not just <br> clothes,<br> it’s <br> <strong>work of art.</strong>
+    </div>
+
+    <div class="banner-btn">
+      <a href="#" class="coolBeans">Drow Now</a>
+    </div>
+  </div>
+
+  <!-- Carousel Section -->
+   <div class="card-banner"> 
+    <h1> Tera Bhaii seedhe maut </h1>
+  <div class="card-carousel">
+    
+    <button class="nav-btn left-btn" onclick="scrollCards(-1)">&#10094;</button>
+    <div class="card-wrapper" id="cardWrapper">
+        
+      <div class="card">
+        <div class = card-image>
+        <img src="banner.jpg" alt="">
+        </div>
+        <div class = "card-text">
+            <div>
+                <h2>
+                    Card 1
+                </h2>
+                
+            </div>
+            <div style=" margin-left: 9rem;">
+              <a href="product.html">
+                <button class="custom-btn">Shop Now</button>
+              </a>
+              </div>
+              
+        </div>
+        <p style="text-align: left; font-size: 0.8rem; color: #666;  " >
+            clothes<br> it’s <br> <strong>work of art.</strong>
+        </p>
+      </div>
+      <div class="card">
+        <div class = card-image>
+        <img src="banner.jpg" alt="">
+        </div>
+        <div class = "card-text">
+            <div>
+                <h2>
+                    Card 1
+                </h2>
+                
+            </div>
+            <div style=" margin-left: 9rem;">
+              <a href="product.html">
+                <button class="custom-btn">Shop Now</button>
+              </a>
+              </div>
+              
+        </div>
+        <p style="text-align: left; font-size: 0.8rem; color: #666;  " >
+            clothes<br> it’s <br> <strong>work of art.</strong>
+        </p>
+      </div>
+      
+      <div class="card">
+        <div class = card-image>
+        <img src="banner.jpg" alt="">
+        </div>
+        <div class = "card-text">
+            <div>
+                <h2>
+                    Card 1
+                </h2>
+                
+            </div>
+            <div style=" margin-left: 9rem;">
+              <a href="product.html">
+                <button class="custom-btn">Shop Now</button>
+              </a>
+              </div>
+              
+        </div>
+        <p style="text-align: left; font-size: 0.8rem; color: #666;  " >
+            clothes<br> it’s <br> <strong>work of art.</strong>
+        </p>
+      </div>
+      <div class="card">
+        <div class = card-image>
+        <img src="banner.jpg" alt="">
+        </div>
+        <div class = "card-text">
+            <div>
+                <h2>
+                    Card 1
+                </h2>
+                
+            </div>
+            <div style=" margin-left: 9rem;">
+              <a href="product.html">
+                <button class="custom-btn">Shop Now</button>
+              </a>
+              </div>
+              
+        </div>
+        <p style="text-align: left; font-size: 0.8rem; color: #666;  " >
+            clothes<br> it’s <br> <strong>work of art.</strong>
+        </p>
+      </div>
+      <div class="card">
+        <div class = card-image>
+        <img src="banner.jpg" alt="">
+        </div>
+        <div class = "card-text">
+            <div>
+                <h2>
+                    Card 1
+                </h2>
+                
+            </div>
+            <div style=" margin-left: 9rem;">
+              <a href="product.html">
+                <button class="custom-btn">Shop Now</button>
+              </a>
+              </div>
+              
+        </div>
+        <p style="text-align: left; font-size: 0.8rem; color: #666;  " >
+            clothes<br> it’s <br> <strong>work of art.</strong>
+        </p>
+      </div>
+      <div class="card">
+        <div class = card-image>
+        <img src="banner.jpg" alt="">
+        </div>
+        <div class = "card-text">
+            <div>
+                <h2>
+                    Card 1
+                </h2>
+                
+            </div>
+            <div style=" margin-left: 9rem;">
+              <a href="product.html">
+                <button class="custom-btn">Shop Now</button>
+              </a>
+              </div>
+              
+        </div>
+        <p style="text-align: left; font-size: 0.8rem; color: #666;  " >
+            clothes<br> it’s <br> <strong>work of art.</strong>
+        </p>
+      </div>
+      <div class="card">
+        <div class = card-image>
+        <img src="banner.jpg" alt="">
+        </div>
+        <div class = "card-text">
+            <div>
+                <h2>
+                    Card 1
+                </h2>
+                
+            </div>
+            <div style=" margin-left: 9rem;">
+              <a href="product.html">
+                <button class="custom-btn">Shop Now</button>
+              </a>
+              </div>
+              
+        </div>
+        <p style="text-align: left; font-size: 0.8rem; color: #666;  " >
+            clothes<br> it’s <br> <strong>work of art.</strong>
+        </p>
+      </div>
+    </div>
+    <button class="nav-btn right-btn" onclick="scrollCards(1)">&#10095;</button>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <h1 class="title">CATEGORY</h1>
+  <div class="categories">
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Shirt" />
+      <div class="label">Shirt</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="T-Shirt" />
+      <div class="label">T-Shirt</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Pants" />
+      <div class="label">Pants</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Pants" />
+      <div class="label">Pants</div>
+    </a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="categories">
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Shirt" />
+      <div class="label">Shirt</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="T-Shirt" />
+      <div class="label">T-Shirt</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Pants" />
+      <div class="label">Pants</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Pants" />
+      <div class="label">Pants</div>
+    </a>
+    </div>
+  </div>
+</div>
+
+<div class="containerar">
+  <h1 class="title">A C C S E S I R E S</h1>
+  <div class="categories">
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Shirt" />
+      <div class="label">Shirt</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="T-Shirt" />
+      <div class="label">T-Shirt</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Pants" />
+      <div class="label">Pants</div>
+    </a>
+    </div>
+    <div class="category">
+      <a href="product.html">
+      <img src="banner.jpg" alt="Pants" />
+      <div class="label">Pants</div>
+    </a>
+    </div>
+  </div>
+</div>
+
+  <script>
+    const suggestionsBox = document.getElementById('suggestions');
+    const menuDropdown = document.getElementById('menuDropdown');
+
+    function showSuggestions() {
+      suggestionsBox.style.display = 'block';
+    }
+
+    function hideSuggestions() {
+      setTimeout(() => {
+        suggestionsBox.style.display = 'none';
+      }, 150);
+    }
+
+    function toggleMenu() {
+      menuDropdown.style.display = menuDropdown.style.display === 'grid' ? 'none' : 'grid';
+    }
+
+    window.addEventListener('click', function(e) {
+      if (!e.target.closest('.menu-container')) {
+        menuDropdown.style.display = 'none';
+      }
+    });
+
+    function scrollCards(direction) {
+      const wrapper = document.getElementById('cardWrapper');
+      const cardWidth = wrapper.querySelector('.card').offsetWidth + 16; // Gap of 1rem
+      wrapper.scrollLeft += direction * cardWidth;
+    }
+  </script>
+</body>
+</html>
